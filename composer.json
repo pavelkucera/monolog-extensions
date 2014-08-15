@@ -1,0 +1,30 @@
+{
+    "name": "kucera/monolog-extensions",
+    "description": "A set of Monolog extensions.",
+    "type": "library",
+    "keywords": ["Monolog", "Tracy", "log", "logging", "blue screen"],
+    "homepage": "https://github.com/pavelkucera/monolog-extensions",
+    "license": ["MIT", "GPL-2.0", "GPL-3.0"],
+    "authors": [
+        {
+            "name": "Pavel Kučera",
+            "homepage": "https://github.com/pavelkucera"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/pavelkucera/monolog-extensions/issues"
+    },
+    "require": {
+        "php": ">=5.3.1",
+        "monolog/monolog": "~1.0",
+        "tracy/tracy": "~2.2.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kucera\\Monolog\\": "src/Monolog/"
+        }
+    }
+}
