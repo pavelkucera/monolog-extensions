@@ -36,4 +36,4 @@ $logger->critical('Exception occured!', array(
 ```
 
 #### Tips
-You don't have to use the factory method, handler is instantiable on its own. Even though `Kucera\Monolog\Factory::createBlueScreen()` might come in handy then.
+You don't have to use the factory method, handler is instantiable on its own. `Kucera\Monolog\Factory::blueScreen()` might come in handy then.
