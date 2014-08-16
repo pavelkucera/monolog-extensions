@@ -1,5 +1,10 @@
 kucera/monolog-extensions
 ======
+[![Build Status](https://travis-ci.org/pavelkucera/monolog-extensions.svg?branch=master)](https://travis-ci.org/pavelkucera/monolog-extensions)
+[![Downloads this Month](https://img.shields.io/packagist/dm/kucera/monolog-extensions.svg)](https://packagist.org/packages/kdyby/doctrine)
+[![Latest stable](https://img.shields.io/packagist/v/kucera/monolog-extensions.svg)](https://packagist.org/packages/kdyby/doctrine)
+
+
 A set of [Monolog](http://github.com/seldaek/monolog) extensions.
 
 Installation
