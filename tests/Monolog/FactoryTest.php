@@ -16,7 +16,7 @@ class BlueScreenFactoryTest extends TestCase
     public function testBlueScreenHandler()
     {
         $handler = Factory::blueScreenHandler(__DIR__);
-
+        $this->assertInstanceOf('Kucera\Monolog\Handler\BlueScreenHandler', $handler);
     }
 
 }
