@@ -9,15 +9,14 @@ namespace Kucera\Monolog\Handler;
 
 use Monolog\Logger;
 
-
 class BlueScreenHandler extends \Monolog\Handler\AbstractProcessingHandler
 {
+
     /** @var \Tracy\BlueScreen */
     private $blueScreen;
 
     /** @var string */
     private $logDirectory;
-
 
     /**
      * @param \Tracy\BlueScreen $blueScreen
@@ -36,7 +35,6 @@ class BlueScreenHandler extends \Monolog\Handler\AbstractProcessingHandler
         $this->logDirectory = $logDirectory;
         parent::__construct($level, $bubble);
     }
-
 
     /**
      * @param array $record
@@ -67,7 +65,6 @@ class BlueScreenHandler extends \Monolog\Handler\AbstractProcessingHandler
         }
     }
 
-
     /**
      * @param \Exception $exception
      * @return string
@@ -76,7 +73,6 @@ class BlueScreenHandler extends \Monolog\Handler\AbstractProcessingHandler
     {
         return md5(preg_replace('~(Resource id #)\d+~', '$1', $exception));
     }
-
 
     /**
      * @param string $filename
@@ -95,7 +91,6 @@ class BlueScreenHandler extends \Monolog\Handler\AbstractProcessingHandler
         }
     }
 
-
     /**
      * @return string
      */
@@ -103,4 +98,5 @@ class BlueScreenHandler extends \Monolog\Handler\AbstractProcessingHandler
     {
         return $this->logDirectory;
     }
+
 }

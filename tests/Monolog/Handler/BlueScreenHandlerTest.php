@@ -5,15 +5,14 @@ namespace Kucera\Monolog\Tests\Handler;
 use Kucera\Monolog\Handler\BlueScreenHandler;
 use Monolog\Logger;
 
-
 class BlueScreenHandlerTest extends \Kucera\Monolog\Tests\TestCase
 {
+
     /** @var string */
     private $logDirectory;
 
     /** @var BlueScreenHandler */
     private $handler;
-
 
     public function setup()
     {
@@ -28,7 +27,6 @@ class BlueScreenHandlerTest extends \Kucera\Monolog\Tests\TestCase
         $this->handler = new BlueScreenHandler($blueScreen, $logDirectory);
     }
 
-
     public function testSkipsInvalidException()
     {
         $record = $this->createRecord($exception = 'Something weird is happening.');
@@ -36,7 +34,6 @@ class BlueScreenHandlerTest extends \Kucera\Monolog\Tests\TestCase
 
         $this->assertSame(0, $this->countExceptionFiles());
     }
-
 
     public function testSkipsEmptyException()
     {
@@ -46,7 +43,6 @@ class BlueScreenHandlerTest extends \Kucera\Monolog\Tests\TestCase
 
         $this->assertSame(0, $this->countExceptionFiles());
     }
-
 
     public function testSaveException()
     {
@@ -58,7 +54,6 @@ class BlueScreenHandlerTest extends \Kucera\Monolog\Tests\TestCase
 
         $this->assertTrue(is_file($file));
     }
-
 
     public function testDoesNotSaveTwice()
     {
@@ -77,13 +72,11 @@ class BlueScreenHandlerTest extends \Kucera\Monolog\Tests\TestCase
         $this->assertSame(1, $this->countExceptionFiles());
     }
 
-
     private function countExceptionFiles()
     {
         $directory = new \DirectoryIterator($this->logDirectory);
         return (iterator_count($directory) - 2); // minus dotfiles
     }
-
 
     /**
      * @param \Exception $exception
@@ -104,4 +97,5 @@ class BlueScreenHandlerTest extends \Kucera\Monolog\Tests\TestCase
             'extra' => array(),
         );
     }
+
 }

@@ -8,9 +8,9 @@ namespace Kucera\Monolog;
 
 use Monolog\Logger;
 
-
 class Factory
 {
+
     /**
      * @param array $info
      * @return \Tracy\BlueScreen
@@ -26,7 +26,6 @@ class Factory
         return $blueScreen;
     }
 
-
     /**
      * @param string $logDirectory
      * @param int $level
@@ -39,4 +38,5 @@ class Factory
         $blueScreen = $blueScreen ?: static::blueScreen();
         return new Handler\BlueScreenHandler($blueScreen, $logDirectory, $level, $bubble);
     }
+
 }
