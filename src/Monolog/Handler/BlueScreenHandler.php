@@ -58,7 +58,7 @@ class BlueScreenHandler extends \Monolog\Handler\AbstractProcessingHandler
 		$save = TRUE;
 		foreach (new \DirectoryIterator($this->logDirectory) as $entry) {
 			// Exception already logged
-			if (strpos($entry, $hash)) {
+			if (strpos($entry, $hash) !== FALSE) {
 				$filename = $entry;
 				$save = FALSE;
 				break;
