@@ -27,6 +27,11 @@
 			"Kucera\\Monolog\\": "src/Monolog/"
 		}
 	},
+	"autoload-dev": {
+		"psr-4": {
+			"Kucera\\Monolog\\Tests\\": "tests/Monolog/"
+		}
+	},
 	"extra": {
 		"branch-alias": {
 			"dev-master": "1.0-dev"
