@@ -27,14 +27,18 @@ class BlueScreenHandler extends \Monolog\Handler\AbstractProcessingHandler
      */
     public function __construct(BlueScreen $blueScreen, $logDirectory, $level = Logger::DEBUG, $bubble = TRUE)
     {
-        $logDirectory = realpath($logDirectory);
-        if ($logDirectory === FALSE) {
-            throw new \RuntimeException('Log directory not found or is not a directory.');
+        parent::__construct($level, $bubble);
+
+        $logDirectoryRealPath = realpath($logDirectory);
+        if ($logDirectoryRealPath === FALSE) {
+            throw new \RuntimeException(sprintf(
+                'Tracy log directory "%s" not found or is not a directory.',
+                $logDirectory
+            ));
         }
 
         $this->blueScreen = $blueScreen;
-        $this->logDirectory = $logDirectory;
-        parent::__construct($level, $bubble);
+        $this->logDirectory = $logDirectoryRealPath;
     }
 
     /**
