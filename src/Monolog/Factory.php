@@ -24,7 +24,7 @@ class Factory
 		$blueScreen->info = array_merge(array(
 			'PHP ' . PHP_VERSION,
 			isset($_SERVER['SERVER_SOFTWARE']) ? $_SERVER['SERVER_SOFTWARE'] : NULL,
-			'Tracy ' . Debugger::$version,
+			'Tracy ' . Debugger::VERSION,
 		), $info);
 		return $blueScreen;
 	}
