@@ -1,10 +1,8 @@
 <?php
 
-namespace Kucera\Monolog\Tests;
+namespace Kucera\Monolog;
 
-use Kucera\Monolog\Factory;
-
-class BlueScreenFactoryTest extends \Kucera\Monolog\Tests\TestCase
+class BlueScreenFactoryTest extends \Kucera\Monolog\TestCase
 {
 
 	public function testBlueScreen()
