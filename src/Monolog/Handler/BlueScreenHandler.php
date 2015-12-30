@@ -8,23 +8,24 @@
 namespace Kucera\Monolog\Handler;
 
 use Monolog\Logger;
+use Tracy\BlueScreen;
 
 class BlueScreenHandler extends \Monolog\Handler\AbstractProcessingHandler
 {
 
-    /** @var \Tracy\BlueScreen */
+    /** @var BlueScreen */
     private $blueScreen;
 
     /** @var string */
     private $logDirectory;
 
     /**
-     * @param \Tracy\BlueScreen $blueScreen
+     * @param BlueScreen $blueScreen
      * @param bool $logDirectory
      * @param int $level
      * @param bool $bubble
      */
-    public function __construct(\Tracy\BlueScreen $blueScreen, $logDirectory, $level = Logger::DEBUG, $bubble = TRUE)
+    public function __construct(BlueScreen $blueScreen, $logDirectory, $level = Logger::DEBUG, $bubble = TRUE)
     {
         $logDirectory = realpath($logDirectory);
         if ($logDirectory === FALSE) {

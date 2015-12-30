@@ -4,7 +4,7 @@ namespace Kucera\Monolog\Tests;
 
 use Kucera\Monolog\Factory;
 
-class BlueScreenFactoryTest extends TestCase
+class BlueScreenFactoryTest extends \Kucera\Monolog\Tests\TestCase
 {
 
     public function testBlueScreen()
