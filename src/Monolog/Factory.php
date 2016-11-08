@@ -15,17 +15,17 @@ class Factory
 {
 
 	/**
-	 * @param array $info
+	 * @param mixed[] $info
 	 * @return BlueScreen
 	 */
-	public static function blueScreen(array $info = array())
+	public static function blueScreen(array $info = [])
 	{
 		$blueScreen = new BlueScreen();
-		$blueScreen->info = array_merge(array(
+		$blueScreen->info = array_merge([
 			'PHP ' . PHP_VERSION,
 			isset($_SERVER['SERVER_SOFTWARE']) ? $_SERVER['SERVER_SOFTWARE'] : NULL,
 			'Tracy ' . Debugger::VERSION,
-		), $info);
+		], $info);
 		return $blueScreen;
 	}
 
