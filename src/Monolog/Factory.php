@@ -4,6 +4,8 @@
  * Copyright (c) 2014 Pavel Kučera (http://github.com/pavelkucera)
  */
 
+declare(strict_types = 1);
+
 namespace Kucera\Monolog;
 
 use Kucera\Monolog\Handler\BlueScreenHandler;
@@ -18,7 +20,7 @@ class Factory
 	 * @param mixed[] $info
 	 * @return BlueScreen
 	 */
-	public static function blueScreen(array $info = [])
+	public static function blueScreen(array $info = []): BlueScreen
 	{
 		$blueScreen = new BlueScreen();
 		$blueScreen->info = array_merge([
@@ -36,7 +38,12 @@ class Factory
 	 * @param BlueScreen $blueScreen
 	 * @return BlueScreenHandler
 	 */
-	public static function blueScreenHandler($logDirectory, $level = Logger::DEBUG, $bubble = TRUE, BlueScreen $blueScreen = NULL)
+	public static function blueScreenHandler(
+		string $logDirectory,
+		int $level = Logger::DEBUG,
+		bool $bubble = TRUE,
+		BlueScreen $blueScreen = NULL
+	): BlueScreenHandler
 	{
 		$blueScreen = $blueScreen !== NULL ? $blueScreen : static::blueScreen();
 		return new BlueScreenHandler($blueScreen, $logDirectory, $level, $bubble);

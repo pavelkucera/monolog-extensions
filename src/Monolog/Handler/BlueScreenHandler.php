@@ -5,6 +5,8 @@
  * Copyright (c) 2004 David Grudl (http://davidgrudl.com)
  */
 
+declare(strict_types = 1);
+
 namespace Kucera\Monolog\Handler;
 
 use DirectoryIterator;
@@ -22,11 +24,11 @@ class BlueScreenHandler extends \Monolog\Handler\AbstractProcessingHandler
 
 	/**
 	 * @param BlueScreen $blueScreen
-	 * @param bool $logDirectory
+	 * @param string $logDirectory
 	 * @param int $level
 	 * @param bool $bubble
 	 */
-	public function __construct(BlueScreen $blueScreen, $logDirectory, $level = Logger::DEBUG, $bubble = TRUE)
+	public function __construct(BlueScreen $blueScreen, string $logDirectory, int $level = Logger::DEBUG, bool $bubble = TRUE)
 	{
 		parent::__construct($level, $bubble);
 
@@ -59,7 +61,7 @@ class BlueScreenHandler extends \Monolog\Handler\AbstractProcessingHandler
 		$save = TRUE;
 		foreach (new DirectoryIterator($this->logDirectory) as $entry) {
 			// Exception already logged
-			if (strpos($entry, $hash) !== FALSE) {
+			if (strpos((string) $entry, $hash) !== FALSE) {
 				$filename = $entry;
 				$save = FALSE;
 				break;
@@ -75,7 +77,7 @@ class BlueScreenHandler extends \Monolog\Handler\AbstractProcessingHandler
 	 * @param \Exception $exception
 	 * @return string
 	 */
-	public function getExceptionHash(\Exception $exception)
+	public function getExceptionHash(\Exception $exception): string
 	{
 		return md5(preg_replace('~(Resource id #)\d+~', '$1', $exception));
 	}
@@ -84,7 +86,7 @@ class BlueScreenHandler extends \Monolog\Handler\AbstractProcessingHandler
 	 * @param string $filename
 	 * @param \Exception $exception
 	 */
-	private function save($filename, \Exception $exception)
+	private function save(string $filename, \Exception $exception)
 	{
 		$path = sprintf('%s/%s', $this->logDirectory, $filename);
 
@@ -104,7 +106,7 @@ class BlueScreenHandler extends \Monolog\Handler\AbstractProcessingHandler
 	/**
 	 * @return string
 	 */
-	public function getLogDirectory()
+	public function getLogDirectory(): string
 	{
 		return $this->logDirectory;
 	}

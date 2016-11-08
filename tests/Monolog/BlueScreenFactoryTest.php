@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Kucera\Monolog;
 
 use Kucera\Monolog\Handler\BlueScreenHandler;

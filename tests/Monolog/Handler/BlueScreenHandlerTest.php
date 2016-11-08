@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Kucera\Monolog\Handler;
 
 use DateTime;
@@ -75,7 +77,7 @@ class BlueScreenHandlerTest extends \Kucera\Monolog\TestCase
 		$this->assertSame(1, $this->countExceptionFiles());
 	}
 
-	private function countExceptionFiles()
+	private function countExceptionFiles(): int
 	{
 		$directory = new DirectoryIterator($this->logDirectory);
 		return (iterator_count($directory) - 2); // minus dotfiles
@@ -86,7 +88,7 @@ class BlueScreenHandlerTest extends \Kucera\Monolog\TestCase
 	 * @param int $level
 	 * @return mixed[]
 	 */
-	private function createRecord($exception = NULL, $level = Logger::CRITICAL)
+	private function createRecord($exception = NULL, $level = Logger::CRITICAL): array
 	{
 		return [
 			'message' => 'record',
