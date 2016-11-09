@@ -69,7 +69,10 @@ class BlueScreenHandler extends \Monolog\Handler\AbstractProcessingHandler
 		}
 
 		if ($save === TRUE) {
-			$this->save($filename, $exception);
+			$this->blueScreen->renderToFile(
+				$exception,
+				sprintf('%s/%s', $this->logDirectory, $filename)
+			);
 		}
 	}
 
@@ -80,27 +83,6 @@ class BlueScreenHandler extends \Monolog\Handler\AbstractProcessingHandler
 	public function getExceptionHash(\Exception $exception): string
 	{
 		return md5(preg_replace('~(Resource id #)\d+~', '$1', $exception));
-	}
-
-	/**
-	 * @param string $filename
-	 * @param \Exception $exception
-	 */
-	private function save(string $filename, \Exception $exception)
-	{
-		$path = sprintf('%s/%s', $this->logDirectory, $filename);
-
-		$logHandle = @fopen($path, 'w');
-		if ($logHandle === FALSE) {
-			ob_start(); // double buffer prevents sending HTTP headers in some PHP
-			ob_start(function ($buffer) use ($logHandle) {
-				fwrite($logHandle, $buffer);
-			}, 4096);
-			$this->blueScreen->render($exception);
-			ob_end_flush();
-			ob_end_clean();
-			fclose($logHandle);
-		}
 	}
 
 	/**
