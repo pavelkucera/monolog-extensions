@@ -50,22 +50,18 @@ class BlueScreenHandler extends \Monolog\Handler\AbstractProcessingHandler
 
 		$filename = sprintf('exception--%s--%s.html', $datetime, $hash);
 
-		$save = TRUE;
 		foreach (new DirectoryIterator($this->logDirectory) as $entry) {
 			// Exception already logged
-			if (strpos((string) $entry, $hash) !== FALSE) {
-				$filename = $entry;
-				$save = FALSE;
+			if (strpos($entry->getFilename(), $hash) !== FALSE) {
+				$filename = $entry->getFilename();
 				break;
 			}
 		}
 
-		if ($save === TRUE) {
-			$this->blueScreen->renderToFile(
-				$exception,
-				sprintf('%s/%s', $this->logDirectory, $filename)
-			);
-		}
+		$this->blueScreen->renderToFile(
+			$exception,
+			sprintf('%s/%s', $this->logDirectory, $filename)
+		);
 	}
 
 	public function getExceptionHash(\Throwable $exception): string
