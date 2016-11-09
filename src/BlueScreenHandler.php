@@ -22,12 +22,6 @@ class BlueScreenHandler extends \Monolog\Handler\AbstractProcessingHandler
 	/** @var string */
 	private $logDirectory;
 
-	/**
-	 * @param BlueScreen $blueScreen
-	 * @param string $logDirectory
-	 * @param int $level
-	 * @param bool $bubble
-	 */
 	public function __construct(BlueScreen $blueScreen, string $logDirectory, int $level = Logger::DEBUG, bool $bubble = TRUE)
 	{
 		parent::__construct($level, $bubble);
@@ -73,18 +67,11 @@ class BlueScreenHandler extends \Monolog\Handler\AbstractProcessingHandler
 		}
 	}
 
-	/**
-	 * @param \Exception $exception
-	 * @return string
-	 */
 	public function getExceptionHash(\Exception $exception): string
 	{
 		return md5(preg_replace('~(Resource id #)\d+~', '$1', $exception));
 	}
 
-	/**
-	 * @return string
-	 */
 	public function getLogDirectory(): string
 	{
 		return $this->logDirectory;
