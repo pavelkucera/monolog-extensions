@@ -11,7 +11,7 @@ class BlueScreenFactoryTest extends \Kucera\Monolog\TestCase
 
 	public function testBlueScreen()
 	{
-		$blueScreen = Factory::blueScreen();
+		$blueScreen = BlueScreenFactory::blueScreen();
 		$this->assertInstanceOf(BlueScreen::class, $blueScreen);
 	}
 

@@ -11,7 +11,7 @@ namespace Kucera\Monolog;
 use Tracy\BlueScreen;
 use Tracy\Debugger;
 
-class Factory
+class BlueScreenFactory
 {
 
 	/**
