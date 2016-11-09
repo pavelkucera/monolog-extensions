@@ -32,16 +32,8 @@ class BlueScreenHandler extends \Monolog\Handler\AbstractProcessingHandler
 	{
 		parent::__construct($level, $bubble);
 
-		$logDirectoryRealPath = realpath($logDirectory);
-		if ($logDirectoryRealPath === FALSE) {
-			throw new \RuntimeException(sprintf(
-				'Tracy log directory "%s" not found or is not a directory.',
-				$logDirectory
-			));
-		}
-
 		$this->blueScreen = $blueScreen;
-		$this->logDirectory = $logDirectoryRealPath;
+		$this->logDirectory = $logDirectory;
 	}
 
 	/**
@@ -52,6 +44,14 @@ class BlueScreenHandler extends \Monolog\Handler\AbstractProcessingHandler
 		if (!isset($record['context']['exception']) || !$record['context']['exception'] instanceof \Exception) {
 			return;
 		}
+
+		if (!is_dir($this->logDirectory)) {
+			throw new \RuntimeException(sprintf(
+				'Path "%s" not found or it is not a directory.',
+				$this->logDirectory
+			));
+		}
+
 		$exception = $record['context']['exception'];
 
 		$datetime = @$record['datetime']->format('Y-m-d-H-i-s');
