@@ -47,6 +47,7 @@ class BlueScreenHandler extends \Monolog\Handler\AbstractProcessingHandler
 
 		$datetime = @$record['datetime']->format('Y-m-d-H-i-s');
 		$hash = $this->getExceptionHash($exception);
+
 		$filename = sprintf('exception--%s--%s.html', $datetime, $hash);
 
 		$save = TRUE;
@@ -69,7 +70,22 @@ class BlueScreenHandler extends \Monolog\Handler\AbstractProcessingHandler
 
 	public function getExceptionHash(\Throwable $exception): string
 	{
-		return md5(preg_replace('~(Resource id #)\d+~', '$1', $exception));
+		$data = [];
+		while ($exception) {
+			$data[] = [
+				$exception->getMessage(),
+				$exception->getCode(),
+				$exception->getFile(),
+				$exception->getLine(),
+				array_map(function ($item) {
+					unset($item['args']);
+					return $item;
+				}, $exception->getTrace()),
+			];
+			$exception = $exception->getPrevious();
+		}
+
+		return substr(md5(serialize($data)), 0, 10);
 	}
 
 	public function getLogDirectory(): string
