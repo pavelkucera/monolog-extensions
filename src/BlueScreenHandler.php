@@ -46,10 +46,7 @@ class BlueScreenHandler extends \Monolog\Handler\AbstractProcessingHandler
 		}
 
 		if (!is_dir($this->logDirectory)) {
-			throw new \RuntimeException(sprintf(
-				'Path "%s" not found or it is not a directory.',
-				$this->logDirectory
-			));
+			throw new \Kucera\Monolog\LogDirectoryIsNotDirectoryException($this->logDirectory);
 		}
 
 		$exception = $record['context']['exception'];
