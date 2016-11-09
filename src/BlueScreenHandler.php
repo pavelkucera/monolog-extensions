@@ -7,7 +7,7 @@
 
 declare(strict_types = 1);
 
-namespace Kucera\Monolog\Handler;
+namespace Kucera\Monolog;
 
 use DirectoryIterator;
 use Monolog\Logger;

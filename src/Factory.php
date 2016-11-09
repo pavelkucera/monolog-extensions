@@ -8,8 +8,6 @@ declare(strict_types = 1);
 
 namespace Kucera\Monolog;
 
-use Kucera\Monolog\Handler\BlueScreenHandler;
-use Monolog\Logger;
 use Tracy\BlueScreen;
 use Tracy\Debugger;
 
@@ -29,24 +27,6 @@ class Factory
 			'Tracy ' . Debugger::VERSION,
 		], $info);
 		return $blueScreen;
-	}
-
-	/**
-	 * @param string $logDirectory
-	 * @param int $level
-	 * @param bool $bubble
-	 * @param BlueScreen $blueScreen
-	 * @return BlueScreenHandler
-	 */
-	public static function blueScreenHandler(
-		string $logDirectory,
-		int $level = Logger::DEBUG,
-		bool $bubble = TRUE,
-		BlueScreen $blueScreen = NULL
-	): BlueScreenHandler
-	{
-		$blueScreen = $blueScreen !== NULL ? $blueScreen : static::blueScreen();
-		return new BlueScreenHandler($blueScreen, $logDirectory, $level, $bubble);
 	}
 
 }
