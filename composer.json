@@ -28,12 +28,12 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Kucera\\Monolog\\": "src/Monolog/"
+			"Kucera\\Monolog\\": "src/"
 		}
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"Kucera\\Monolog\\": "tests/Monolog/"
+			"Kucera\\Monolog\\": "tests/"
 		}
 	},
 	"extra": {
