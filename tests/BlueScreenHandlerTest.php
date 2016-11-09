@@ -79,12 +79,13 @@ class BlueScreenHandlerTest extends \Kucera\Monolog\TestCase
 	public function testDoesNotSaveTwice()
 	{
 		// Save first
-		$record = $this->createRecord(new \Exception('message'));
+		$record = $this->createRecord($exception = new \Exception('message'));
 		$this->handler->handle($record);
 
 		// Handle  second
-		$record = $this->createRecord($exception = new \Exception('message'));
+		$record = $this->createRecord($exception);
 		$record['datetime']->modify('+ 42 minutes');
+		$this->handler->handle($record);
 
 		$hash = $this->handler->getExceptionHash($exception);
 		$file = sprintf('%s/exception--2012-12-21-00-42-00--%s.html', $this->logDirectory, $hash);
