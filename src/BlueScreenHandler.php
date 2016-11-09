@@ -35,7 +35,7 @@ class BlueScreenHandler extends \Monolog\Handler\AbstractProcessingHandler
 	 */
 	protected function write(array $record)
 	{
-		if (!isset($record['context']['exception']) || !$record['context']['exception'] instanceof \Exception) {
+		if (!isset($record['context']['exception']) || !$record['context']['exception'] instanceof \Throwable) {
 			return;
 		}
 
@@ -67,7 +67,7 @@ class BlueScreenHandler extends \Monolog\Handler\AbstractProcessingHandler
 		}
 	}
 
-	public function getExceptionHash(\Exception $exception): string
+	public function getExceptionHash(\Throwable $exception): string
 	{
 		return md5(preg_replace('~(Resource id #)\d+~', '$1', $exception));
 	}

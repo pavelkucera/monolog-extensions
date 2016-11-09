@@ -49,15 +49,31 @@ class BlueScreenHandlerTest extends \Kucera\Monolog\TestCase
 		$this->assertSame(0, $this->countExceptionFiles());
 	}
 
-	public function testSaveException()
+	/**
+	 * @dataProvider exceptionProvider
+	 *
+	 * @param \Throwable $exception
+	 */
+	public function testSaveException(\Throwable $exception)
 	{
-		$record = $this->createRecord($exception = new \Exception());
+		$record = $this->createRecord($exception);
 		$this->handler->handle($record);
 
 		$hash = $this->handler->getExceptionHash($exception);
 		$file = sprintf('%s/exception-2012-12-21-00-00-00-%s.html', $this->logDirectory, $hash);
 
 		$this->assertTrue(is_file($file));
+	}
+
+	/**
+	 * @return mixed[]
+	 */
+	public function exceptionProvider(): array
+	{
+		return [
+			[new \Exception()],
+			[new \Error()],
+		];
 	}
 
 	public function testDoesNotSaveTwice()
