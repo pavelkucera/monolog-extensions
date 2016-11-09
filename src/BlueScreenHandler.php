@@ -9,6 +9,7 @@ declare(strict_types = 1);
 
 namespace Kucera\Monolog;
 
+use DateTimeInterface;
 use DirectoryIterator;
 use Monolog\Logger;
 use Tracy\BlueScreen;
@@ -44,8 +45,17 @@ class BlueScreenHandler extends \Monolog\Handler\AbstractProcessingHandler
 		}
 
 		$exception = $record['context']['exception'];
+		$filename = $this->getExceptionFilename($record['datetime'], $exception);
 
-		$datetime = @$record['datetime']->format('Y-m-d-H-i-s');
+		$this->blueScreen->renderToFile(
+			$exception,
+			sprintf('%s/%s', $this->logDirectory, $filename)
+		);
+	}
+
+	private function getExceptionFilename(DateTimeInterface $recordedTime, \Throwable $exception): string
+	{
+		$datetime = $recordedTime->format('Y-m-d-H-i-s');
 		$hash = $this->getExceptionHash($exception);
 
 		$filename = sprintf('exception--%s--%s.html', $datetime, $hash);
@@ -53,15 +63,11 @@ class BlueScreenHandler extends \Monolog\Handler\AbstractProcessingHandler
 		foreach (new DirectoryIterator($this->logDirectory) as $entry) {
 			// Exception already logged
 			if (strpos($entry->getFilename(), $hash) !== FALSE) {
-				$filename = $entry->getFilename();
-				break;
+				return $entry->getFilename();
 			}
 		}
 
-		$this->blueScreen->renderToFile(
-			$exception,
-			sprintf('%s/%s', $this->logDirectory, $filename)
-		);
+		return $filename;
 	}
 
 	public function getExceptionHash(\Throwable $exception): string
