@@ -13,7 +13,7 @@ Installation
 Using  [Composer](http://getcomposer.org/):
 
 ```sh
-$ composer require kucera/monolog-extensions:~0.1.0
+$ composer require kucera/monolog-extensions:~0.2.0
 ```
 
 
@@ -26,12 +26,19 @@ Converts your exception reports into beautiful and clear html files using [Tracy
 ### Tell me how!
 Just push the handler into the stack.
 ```php
-use Kucera\Monolog\Factory;
+use Kucera\Monolog\BlueScreenFactory;
+use Kucera\Monolog\BlueScreenHandler;
+use Monolog\Logger;
 
 $logger = new Monolog\Logger('channel');
 
 $logDirectory = __DIR__ . '/log';
-$logger->pushHandler(Factory::blueScreenHandler($logDirectory));
+$logger->pushHandler(new BlueScreenHandler(
+    Factory::blueScreen(),
+    $logDirectory,
+    Logger::DEBUG,
+    $bubble = TRUE
+));
 ```
 … Profit!
 ```php
@@ -41,4 +48,4 @@ $logger->critical('Exception occured!', array(
 ```
 
 #### Tips
-You don't have to use the factory method, handler is instantiable on its own. `Kucera\Monolog\Factory::blueScreen()` might come in handy then.
+You don't have to use the factory method, handler is instantiable on its own. `Kucera\Monolog\BlueScreenFactory::create()` might come in handy then.
