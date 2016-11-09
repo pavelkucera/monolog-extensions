@@ -18,7 +18,7 @@ class BlueScreenFactory
 	 * @param mixed[] $info
 	 * @return BlueScreen
 	 */
-	public static function blueScreen(array $info = []): BlueScreen
+	public static function create(array $info = []): BlueScreen
 	{
 		$blueScreen = new BlueScreen();
 		$blueScreen->info = array_merge([
