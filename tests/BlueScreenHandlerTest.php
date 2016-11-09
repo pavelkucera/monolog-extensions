@@ -60,7 +60,7 @@ class BlueScreenHandlerTest extends \Kucera\Monolog\TestCase
 		$this->handler->handle($record);
 
 		$hash = $this->handler->getExceptionHash($exception);
-		$file = sprintf('%s/exception-2012-12-21-00-00-00-%s.html', $this->logDirectory, $hash);
+		$file = sprintf('%s/exception--2012-12-21-00-00-00--%s.html', $this->logDirectory, $hash);
 
 		$this->assertTrue(is_file($file));
 	}
@@ -87,7 +87,7 @@ class BlueScreenHandlerTest extends \Kucera\Monolog\TestCase
 		$record['datetime']->modify('+ 42 minutes');
 
 		$hash = $this->handler->getExceptionHash($exception);
-		$file = sprintf('%s/exception-2012-12-21-00-42-00-%s.html', $this->logDirectory, $hash);
+		$file = sprintf('%s/exception--2012-12-21-00-42-00--%s.html', $this->logDirectory, $hash);
 
 		$this->assertFalse(is_file($file));
 		$this->assertSame(1, $this->countExceptionFiles());

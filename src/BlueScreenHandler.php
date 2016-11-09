@@ -47,7 +47,7 @@ class BlueScreenHandler extends \Monolog\Handler\AbstractProcessingHandler
 
 		$datetime = @$record['datetime']->format('Y-m-d-H-i-s');
 		$hash = $this->getExceptionHash($exception);
-		$filename = sprintf('exception-%s-%s.html', $datetime, $hash);
+		$filename = sprintf('exception--%s--%s.html', $datetime, $hash);
 
 		$save = TRUE;
 		foreach (new DirectoryIterator($this->logDirectory) as $entry) {
